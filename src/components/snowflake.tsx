@@ -3,7 +3,7 @@ import { useOutOfBounds } from "../hooks/use-out-of-bounds";
 import { setTimeout } from "timers";
 import { init } from "next/dist/compiled/webpack/webpack";
 
-export default function SnowBall({
+export default function Snowflake({
   speed = 3,
   size = 5,
   horizontalOffset = 0,
@@ -30,9 +30,9 @@ export default function SnowBall({
     interval = setInterval(() => {
       if (componentRef.current) {
         if (outOfBoundsRef.current || !initRef.current) {
-          console.log(outOfBoundsRef.current);
+          // console.log(outOfBoundsRef.current);
           setTimeout(() => {
-            counterRef.current = 0;
+            counterRef.current = -40;
             initRef.current = true;
           }, delay);
         }
