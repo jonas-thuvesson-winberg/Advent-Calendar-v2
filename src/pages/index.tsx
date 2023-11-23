@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Snowflake from "@/components/snowflake";
 import { ReactElement, useEffect, useRef } from "react";
+import WindowGrid from "@/components/window-grid";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,14 +47,17 @@ export default function Home() {
   return (
     <>
       <div
+        style={{ zIndex: "2" }}
         ref={overlayElem}
         onClick={playMusic}
         className={`absolute h-screen w-screen`}
       ></div>
       <audio ref={audioElem} src="jingle-bells.mp3" loop={true}></audio>
-      <main className={`h-screen w-screen`}>
-        {snowFlakes}
-
+      <main className={`h-screen w-screen bg-red-900`}>
+        <div style={{ zIndex: "1" }} className="w-full h-full absolute">
+          {snowFlakes}
+        </div>
+        <WindowGrid />
         {/* <Snowflake />
       <Snowflake horizontalOffset={50} speed={5} size={7} />
       <Snowflake horizontalOffset={100} speed={4} size={5} delay={100} />
