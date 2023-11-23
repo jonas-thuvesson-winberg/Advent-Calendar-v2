@@ -1,118 +1,59 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
+import SnowBall from "@/components/snow-ball";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+    <main className={`h-screen w-screen`}>
+      <SnowBall />
+      <SnowBall horizontalOffset={50} speed={5} size={7} />
+      <SnowBall horizontalOffset={100} speed={4} size={5} delay={100} />
+      <SnowBall horizontalOffset={100} speed={2} size={10} delay={100} />
+      <SnowBall horizontalOffset={100} speed={7} size={8} delay={100} />
+      <SnowBall horizontalOffset={150} speed={3} size={5} delay={300} />
+      <SnowBall speed={7} size={10} horizontalOffset={200} />
+      <SnowBall horizontalOffset={250} />
+      <SnowBall speed={4} size={10} horizontalOffset={300} />
+      <SnowBall speed={1} size={5} horizontalOffset={350} delay={100} />
+      <SnowBall speed={4} size={8} horizontalOffset={400} delay={300} />
+      <SnowBall speed={2} size={7} horizontalOffset={450} delay={500} />
+      <SnowBall />
+      <SnowBall speed={5} size={7} horizontalOffset={425} />
+      <SnowBall speed={6} size={7} horizontalOffset={425} />
+      <SnowBall speed={7} size={7} horizontalOffset={425} />
+      <SnowBall speed={2} size={5} horizontalOffset={450} delay={100} />
+      <SnowBall speed={3} size={5} horizontalOffset={500} delay={300} />
+      <SnowBall speed={7} size={10} horizontalOffset={550} />
+      <SnowBall horizontalOffset={600} />
+      <SnowBall speed={4} size={10} horizontalOffset={700} />
+      <SnowBall speed={3} size={5} horizontalOffset={725} delay={100} />
+      <SnowBall speed={4} size={8} horizontalOffset={800} delay={300} />
+      <SnowBall speed={2} size={7} horizontalOffset={950} delay={500} />
+      <SnowBall horizontalOffset={975} />
+      <SnowBall speed={10} size={7} horizontalOffset={1000} />
+      <SnowBall speed={2} size={5} horizontalOffset={1100} delay={100} />
+      <SnowBall speed={3} size={5} horizontalOffset={1200} delay={200} />
+      <SnowBall speed={8} size={8} horizontalOffset={1225} delay={100} />
+      <SnowBall horizontalOffset={1300} />
+      <SnowBall horizontalOffset={1325} speed={4} size={10} />
+      <SnowBall horizontalOffset={1400} speed={1} size={5} delay={100} />
+      <SnowBall horizontalOffset={1425} speed={4} size={8} delay={300} />
+      <SnowBall horizontalOffset={1500} speed={2} size={7} delay={500} />
+      <SnowBall horizontalOffset={1550} />
+      <SnowBall horizontalOffset={1575} speed={5} size={7} />
+      <SnowBall horizontalOffset={1600} speed={2} size={5} delay={100} />
+      <SnowBall horizontalOffset={1700} speed={3} size={5} delay={300} />
+      <SnowBall horizontalOffset={1800} speed={10} size={10} />
+      <SnowBall horizontalOffset={1800} speed={12} size={10} />
+      <SnowBall horizontalOffset={1800} speed={15} size={10} />
+      <SnowBall horizontalOffset={1800} speed={7} size={10} />
+      <SnowBall horizontalOffset={1800} speed={9} size={10} />
+      <SnowBall horizontalOffset={1810} />
+      <SnowBall horizontalOffset={1900} speed={4} size={10} />
+      <SnowBall horizontalOffset={2000} speed={3} size={5} delay={100} />
+      <SnowBall horizontalOffset={2050} speed={4} size={8} delay={300} />
+      <SnowBall horizontalOffset={2150} speed={2} size={7} delay={500} />
     </main>
-  )
+  );
 }
