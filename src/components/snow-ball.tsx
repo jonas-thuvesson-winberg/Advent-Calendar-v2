@@ -1,9 +1,10 @@
 import React, { ReactComponentElement, Ref, useEffect, useRef } from "react";
 import { useOutOfBounds } from "../hooks/use-out-of-bounds";
 import { setTimeout } from "timers";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 export default function SnowBall({
-  speed = 1,
+  speed = 3,
   size = 5,
   horizontalOffset = 0,
   delay = 0,
@@ -15,43 +16,47 @@ export default function SnowBall({
 }) {
   const [componentRef, outOfBoundsRef] = useOutOfBounds();
 
-  let counter = React.useRef(0);
+  let counterRef = useRef(0);
+  let initRef = useRef(false);
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
     const progress = () => {
-      componentRef.current.style.transform = `translate(${horizontalOffset}px, ${counter.current}px)`;
-      counter.current = counter.current + speed;
+      componentRef.current.style.transform = `translate(${horizontalOffset}px, ${counterRef.current}px)`;
+      counterRef.current = counterRef.current + speed;
     };
 
     interval = setInterval(() => {
       if (componentRef.current) {
-        let setTimeoutReset = false;
-        if (outOfBoundsRef.current) {
+        if (outOfBoundsRef.current || !initRef.current) {
           console.log(outOfBoundsRef.current);
-          counter.current = 0;
-          setTimeoutReset = true;
-        }
-        if (!setTimeoutReset) {
-          progress();
-        } else {
           setTimeout(() => {
-            progress();
-            setTimeoutReset = false;
+            counterRef.current = 0;
+            initRef.current = true;
           }, delay);
         }
+
+        progress();
       }
     }, 40);
 
     return () => clearInterval(interval);
-  }, [counter, speed, horizontalOffset, delay, componentRef, outOfBoundsRef]);
+  }, [
+    counterRef,
+    speed,
+    horizontalOffset,
+    delay,
+    componentRef,
+    outOfBoundsRef,
+  ]);
 
   return (
     <div
       ref={componentRef}
       style={{
         padding: `${size}px`,
-        transform: `translate(${horizontalOffset}px, ${counter.current}px)`,
+        transform: `translate(${horizontalOffset}px, ${counterRef.current}px)`,
       }}
       className={`ml-2 inline absolute rounded-xl bg-white`}
     ></div>
