@@ -3,7 +3,7 @@ import Window from "./window";
 export default function WindowGrid() {
   const windows = [];
   for (let i = 0; i < 24; i++) {
-    windows.push(<Window key={i} />);
+    windows.push(<Window key={i} dayNum={i + 1} opened={i > 12} />);
   }
 
   return (
