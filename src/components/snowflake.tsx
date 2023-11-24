@@ -31,10 +31,15 @@ export default function Snowflake({
       if (componentRef.current) {
         if (outOfBoundsRef.current || !initRef.current) {
           // console.log(outOfBoundsRef.current);
+          console.log("out of bounds");
           setTimeout(() => {
             counterRef.current = -40;
             initRef.current = true;
+            componentRef.current.classList.add("hidden");
           }, delay);
+        } else {
+          console.log("in bounds");
+          componentRef.current.classList.remove("hidden");
         }
 
         progress();
@@ -57,6 +62,7 @@ export default function Snowflake({
       style={{
         padding: `${size}px`,
         transform: `translate(${horizontalOffset}px, ${counterRef.current}px)`,
+        maxWidth: `${size * 2}px`,
       }}
       className={`ml-2 inline absolute rounded-xl bg-white`}
     ></div>
