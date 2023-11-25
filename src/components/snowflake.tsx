@@ -31,14 +31,14 @@ export default function Snowflake({
       if (componentRef.current) {
         if (outOfBoundsRef.current || !initRef.current) {
           // console.log(outOfBoundsRef.current);
-          console.log("out of bounds");
+          // console.log("out of bounds");
           setTimeout(() => {
             counterRef.current = -40;
             initRef.current = true;
             componentRef.current.classList.add("hidden");
           }, delay);
         } else {
-          console.log("in bounds");
+          // console.log("in bounds");
           componentRef.current.classList.remove("hidden");
         }
 

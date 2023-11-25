@@ -55,7 +55,12 @@ export default function Home() {
         className={`h-screen w-screen bg-red-900`}
       >
         <div
-          style={{ zIndex: "1", maxWidth: maxW + "px", maxHeight: maxH + "px" }}
+          style={{
+            zIndex: "1",
+            maxWidth: maxW + "px",
+            maxHeight: maxH + "px",
+            pointerEvents: "none",
+          }}
           className="w-full h-full absolute overflow-x-hidden overflow-y-hidden"
         >
           {snowFlakes}
