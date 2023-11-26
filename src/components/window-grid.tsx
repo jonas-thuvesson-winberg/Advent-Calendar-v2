@@ -1,9 +1,53 @@
+import useLocalStorage from "@/hooks/use-local-storage";
 import Window from "./window";
+import { useEffect } from "react";
 
+const entries: { ytCode: string; start: number | null; end: number | null }[] =
+  [
+    {
+      ytCode: "7yLxxyzGiko",
+      start: null,
+      end: null,
+    },
+  ];
 export default function WindowGrid() {
   const windows = [];
+  const d = new Date("2023-12-01");
+
+  const getEntry = (
+    data: {
+      ytCode: string;
+      start: number | null;
+      end: number | null;
+    } | null
+  ) => {
+    if (data) {
+      return data;
+    } else {
+      return {
+        ytCode: null,
+        start: null,
+        end: null,
+      };
+    }
+  };
+
   for (let i = 0; i < 24; i++) {
-    windows.push(<Window key={i} dayNum={i + 1} opened={i > 12} />);
+    // const { opened } = dayOpened;
+
+    const { ytCode, start, end } = getEntry(
+      i < entries.length ? entries[i] : null
+    );
+
+    windows.push(
+      <Window
+        key={ytCode || i}
+        ytCode={ytCode || ""}
+        dayNum={i + 1}
+        disabled={!ytCode || (d.getMonth() !== 12 && i + 1 > d.getDate())}
+        start={start || 0}
+      />
+    );
   }
 
   return (

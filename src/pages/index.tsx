@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import Snowflake from "@/components/snowflake";
 import { ReactElement, useEffect, useRef } from "react";
 import WindowGrid from "@/components/window-grid";
+import NoSsr from "@/components/no-ssr";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,13 +32,14 @@ export default function Home() {
     const horizontal = getRandomInt(maxW, 0);
     const delay = getRandomInt(800, 0);
     snowFlakes.push(
-      <Snowflake
-        size={size}
-        speed={speed}
-        horizontalOffset={horizontal}
-        delay={delay}
-        key={i}
-      />
+      <NoSsr key={i}>
+        <Snowflake
+          size={size}
+          speed={speed}
+          horizontalOffset={horizontal}
+          delay={delay}
+        />
+      </NoSsr>
     );
   }
 
@@ -65,7 +67,9 @@ export default function Home() {
         >
           {snowFlakes}
         </div>
-        <WindowGrid />
+        <NoSsr>
+          <WindowGrid />
+        </NoSsr>
       </main>
     </>
   );

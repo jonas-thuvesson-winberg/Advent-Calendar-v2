@@ -2,7 +2,17 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { MouseEventHandler, ReactNode, useState, MouseEvent } from "react";
 import { useTransition, animated, config } from "react-spring";
 
-export default function WindowDialog({ children }: { children: ReactNode }) {
+export default function WindowDialog({
+  children,
+  video,
+  disabled,
+  start,
+}: {
+  children: ReactNode;
+  video: string;
+  disabled: boolean;
+  start: number;
+}) {
   const [open, setOpen] = useState(false);
   const transitions = useTransition(open, {
     from: { opacity: 0, transform: "translateY(-30px)" },
@@ -20,7 +30,11 @@ export default function WindowDialog({ children }: { children: ReactNode }) {
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
+      {!disabled ? (
+        <Dialog.Trigger asChild>{children}</Dialog.Trigger>
+      ) : (
+        children
+      )}
       {transitions((styles, item) =>
         item ? (
           <>
@@ -40,7 +54,17 @@ export default function WindowDialog({ children }: { children: ReactNode }) {
                     className="bg-slate-100 absolute text-black rounded-md py-7 px-5"
                     onClick={handleClick}
                   >
-                    <h1>Hello from inside the Dialog!</h1>
+                    <iframe
+                      width="560"
+                      height="315"
+                      src={`https://www.youtube.com/embed/7yLxxyzGiko?si=HXyGoMzHfdwDXMe2&amp;start=${
+                        start || 0
+                      }`}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
                   </animated.div>
                 </div>
               </Dialog.Close>
