@@ -5,7 +5,7 @@ const useLocalStorage = ({
   initialValue,
 }: {
   key: string;
-  initialValue: { opened: false };
+  initialValue: { opened: boolean };
 }) => {
   const [state, setState] = useState(() => {
     // Initialize the state
