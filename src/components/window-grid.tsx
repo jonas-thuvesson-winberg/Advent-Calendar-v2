@@ -12,7 +12,7 @@ const entries: { ytCode: string; start: number | null; end: number | null }[] =
   ];
 export default function WindowGrid() {
   const windows = [];
-  const d = new Date("2023-12-01");
+  const d = new Date();
 
   const getEntry = (
     data: {
