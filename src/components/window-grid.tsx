@@ -69,6 +69,13 @@ const entries: { ytCode: string; start: number | null; end: number | null }[] =
       start: 5,
       end: null,
     },
+    // 10
+    {
+      // Kalle Anka
+      ytCode: "5lDdJOjU92A",
+      start: 4,
+      end: null,
+    },
   ];
 export default function WindowGrid({
   audioHandlers,
