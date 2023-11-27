@@ -70,9 +70,7 @@ export default function WindowDialog({
                     <iframe
                       className="w-full h-full"
                       // width="560"
-                      src={`https://www.youtube.com/embed/7yLxxyzGiko?si=${video}&amp;start=${
-                        start || 0
-                      }`}
+                      src={`https://www.youtube.com/embed/${video}?start=${start}`}
                       title="YouTube video player"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
