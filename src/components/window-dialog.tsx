@@ -27,7 +27,7 @@ export default function WindowDialog({
     from: { opacity: 0, transform: "translateY(-30px)" },
     enter: { opacity: 1, transform: "translateY(0px)" },
     leave: { opacity: 0, transform: "translateY(-30px)" },
-    config: config.slow,
+    config: config.stiff,
   });
 
   const handleClick: MouseEventHandler<HTMLDivElement> = (
@@ -64,12 +64,12 @@ export default function WindowDialog({
                 <div className="absolute flex justify-center items-center h-screen w-screen inset-0">
                   <animated.div
                     style={styles}
-                    className="z-10 bg-slate-100 absolute text-black rounded-md py-7 px-5"
+                    className="z-10 md:w-[80vw] md:h-[90vh] lg:w-[60vw] lg:h-[60vh] min-h-[50vh] bg-slate-100 absolute text-black rounded-md py-7 px-5"
                     onClick={handleClick}
                   >
                     <iframe
-                      width="560"
-                      height="315"
+                      className="w-full h-full"
+                      // width="560"
                       src={`https://www.youtube.com/embed/7yLxxyzGiko?si=${video}&amp;start=${
                         start || 0
                       }`}
