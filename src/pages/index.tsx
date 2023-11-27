@@ -17,12 +17,11 @@ const maxW = 4600;
 const maxH = 3300;
 
 export interface AudioHandlers {
-  turnDownMusic: () => void;
+  pauseMusic: () => void;
   playMusic: () => void;
 }
 
 export default function Home() {
-  // const springApi = SpringRef();
   const [santaStyle, santaAnimRef] = useSpring(() => ({
     config: config.slow,
     from: { opacity: 1, transform: "rotate(0turn)" },
@@ -33,20 +32,14 @@ export default function Home() {
     from: { opacity: 1 },
   }));
 
-  // const transitions = useTransition(true, {
-  //   from: { opacity: 1, transform: "rotate(0turn)" },
-  //   enter: { opacity: 1, transform: "rotate(1turn)" },
-  //   leave: { opacity: 0, transform: "rotate(0turn)" },
-  //   config: config.slow,
-  // });
-
   const audioElem = useRef<HTMLAudioElement>(null);
   const overlayElem = useRef<HTMLDivElement>(null);
   const enteredPage = useRef(false);
 
   const turnDownMusic = () => {
     if (audioElem.current) {
-      audioElem.current.volume = 0.1;
+      audioElem.current.pause();
+      audioElem.current.volume = 0.5;
     }
   };
 
@@ -58,7 +51,7 @@ export default function Home() {
   };
 
   const audioHandlers: AudioHandlers = {
-    turnDownMusic,
+    pauseMusic: turnDownMusic,
     playMusic,
   };
 

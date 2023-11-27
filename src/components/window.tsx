@@ -50,7 +50,7 @@ export default function Window({
         }
         onClick={() => {
           console.log("click");
-          audioHandlers.turnDownMusic();
+          audioHandlers.pauseMusic();
           setOpened(true);
           setEntry({ opened: true });
         }}
