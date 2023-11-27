@@ -1,12 +1,14 @@
-import { forwardRef, useState } from "react";
+import { RefObject, forwardRef, useState } from "react";
 import WindowDialog from "./window-dialog";
 import useLocalStorage from "@/hooks/use-local-storage";
+import { AudioHandlers } from "@/pages";
 
 export interface WindowProps {
   dayNum: number;
   ytCode: string;
   disabled: boolean;
   start: number;
+  audioHandlers: AudioHandlers;
 }
 
 export default function Window({
@@ -14,6 +16,7 @@ export default function Window({
   ytCode,
   disabled,
   start,
+  audioHandlers,
 }: WindowProps) {
   const additional = disabled
     ? ""
@@ -29,7 +32,12 @@ export default function Window({
   const [opened, setOpened] = useState(initialEntry?.opened);
 
   return (
-    <WindowDialog start={start} video={ytCode} disabled={disabled}>
+    <WindowDialog
+      start={start}
+      video={ytCode}
+      disabled={disabled}
+      audioHandlers={audioHandlers}
+    >
       <div
         style={{
           minWidth: "100px",
@@ -42,6 +50,7 @@ export default function Window({
         }
         onClick={() => {
           console.log("click");
+          audioHandlers.turnDownMusic();
           setOpened(true);
           setEntry({ opened: true });
         }}

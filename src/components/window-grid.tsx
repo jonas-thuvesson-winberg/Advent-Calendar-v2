@@ -1,6 +1,7 @@
 import useLocalStorage from "@/hooks/use-local-storage";
 import Window from "./window";
-import { useEffect } from "react";
+import { RefObject, useEffect } from "react";
+import { AudioHandlers } from "@/pages";
 
 const entries: { ytCode: string; start: number | null; end: number | null }[] =
   [
@@ -10,9 +11,13 @@ const entries: { ytCode: string; start: number | null; end: number | null }[] =
       end: null,
     },
   ];
-export default function WindowGrid() {
+export default function WindowGrid({
+  audioHandlers,
+}: {
+  audioHandlers: AudioHandlers;
+}) {
   const windows = [];
-  const d = new Date();
+  const d = new Date("2023-12-04");
 
   const getEntry = (
     data: {
@@ -33,19 +38,16 @@ export default function WindowGrid() {
   };
 
   for (let i = 0; i < 24; i++) {
-    // const { opened } = dayOpened;
-
-    const { ytCode, start, end } = getEntry(
-      i < entries.length ? entries[i] : null
-    );
-
+    const { ytCode, start } = getEntry(i < entries.length ? entries[i] : null);
+    const disabled = !ytCode || d.getMonth() + 1 !== 12 || d.getDate() < i + 1;
     windows.push(
       <Window
         key={ytCode || i}
         ytCode={ytCode || ""}
         dayNum={i + 1}
-        disabled={!ytCode || (d.getMonth() !== 12 && i + 1 > d.getDate())}
+        disabled={disabled}
         start={start || 0}
+        audioHandlers={audioHandlers}
       />
     );
   }

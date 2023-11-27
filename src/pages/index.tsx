@@ -1,24 +1,85 @@
 import { Inter } from "next/font/google";
 import Snowflake from "@/components/snowflake";
-import { ReactElement, useEffect, useRef } from "react";
+import { ReactElement, useRef } from "react";
 import WindowGrid from "@/components/window-grid";
 import NoSsr from "@/components/no-ssr";
+import {
+  SpringRef,
+  animated,
+  config,
+  useSpring,
+  useTransition,
+} from "react-spring";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const maxW = 4600;
 const maxH = 3300;
 
+export interface AudioHandlers {
+  turnDownMusic: () => void;
+  playMusic: () => void;
+}
+
 export default function Home() {
+  // const springApi = SpringRef();
+  const [santaStyle, santaAnimRef] = useSpring(() => ({
+    config: config.slow,
+    from: { opacity: 1, transform: "rotate(0turn)" },
+  }));
+
+  const [overlayStyle, overlayAnimRef] = useSpring(() => ({
+    config: config.slow,
+    from: { opacity: 1 },
+  }));
+
+  // const transitions = useTransition(true, {
+  //   from: { opacity: 1, transform: "rotate(0turn)" },
+  //   enter: { opacity: 1, transform: "rotate(1turn)" },
+  //   leave: { opacity: 0, transform: "rotate(0turn)" },
+  //   config: config.slow,
+  // });
+
   const audioElem = useRef<HTMLAudioElement>(null);
   const overlayElem = useRef<HTMLDivElement>(null);
-  const musicStarted = useRef(false);
+  const enteredPage = useRef(false);
+
+  const turnDownMusic = () => {
+    if (audioElem.current) {
+      audioElem.current.volume = 0.1;
+    }
+  };
 
   const playMusic = () => {
-    if (musicStarted.current) return;
-    audioElem.current?.play();
-    overlayElem.current?.classList.add("hidden");
-    musicStarted.current = true;
+    if (audioElem.current) {
+      audioElem.current.volume = 0.5;
+      audioElem.current.play();
+    }
+  };
+
+  const audioHandlers: AudioHandlers = {
+    turnDownMusic,
+    playMusic,
+  };
+
+  const onClick = () => {
+    if (enteredPage.current) return;
+    santaAnimRef.start({
+      to: { opacity: 0, transform: "rotate(1turn)" },
+      onStart: () => {
+        console.log("start");
+        playMusic();
+        enteredPage.current = true;
+
+        setTimeout(() => {
+          overlayElem.current?.classList.add("hidden");
+          console.log("off");
+        }, 500);
+      },
+    });
+    overlayAnimRef.start({
+      to: { opacity: 0 },
+    });
   };
 
   const getRandomInt = (max: number, min: number): number => {
@@ -45,12 +106,20 @@ export default function Home() {
 
   return (
     <>
-      <div
-        style={{ zIndex: "2" }}
+      <animated.div
+        style={overlayStyle}
         ref={overlayElem}
-        onClick={playMusic}
-        className={`absolute h-screen w-screen`}
-      ></div>
+        className={`z-10 absolute h-screen w-screen flex justify-center items-center bg-black/50`}
+      >
+        <animated.img
+          onClick={onClick}
+          style={santaStyle}
+          src="/santa2.png"
+          width={500}
+          height={500}
+          alt="Santa"
+        />
+      </animated.div>
       <audio ref={audioElem} src="jingle-bells.mp3" loop={true}></audio>
       <main
         style={{ maxWidth: maxW + "px", maxHeight: maxH + "px" }}
@@ -58,17 +127,16 @@ export default function Home() {
       >
         <div
           style={{
-            zIndex: "1",
             maxWidth: maxW + "px",
             maxHeight: maxH + "px",
             pointerEvents: "none",
           }}
-          className="w-full h-full absolute overflow-x-hidden overflow-y-hidden"
+          className="z-1 w-full h-full absolute overflow-x-hidden overflow-y-hidden"
         >
           {snowFlakes}
         </div>
         <NoSsr>
-          <WindowGrid />
+          <WindowGrid audioHandlers={audioHandlers} />
         </NoSsr>
       </main>
     </>

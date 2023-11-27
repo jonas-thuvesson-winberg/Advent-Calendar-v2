@@ -1,5 +1,12 @@
+import { AudioHandlers } from "@/pages";
 import * as Dialog from "@radix-ui/react-dialog";
-import { MouseEventHandler, ReactNode, useState, MouseEvent } from "react";
+import {
+  MouseEventHandler,
+  ReactNode,
+  useState,
+  MouseEvent,
+  RefObject,
+} from "react";
 import { useTransition, animated, config } from "react-spring";
 
 export default function WindowDialog({
@@ -7,11 +14,13 @@ export default function WindowDialog({
   video,
   disabled,
   start,
+  audioHandlers,
 }: {
   children: ReactNode;
   video: string;
   disabled: boolean;
   start: number;
+  audioHandlers: AudioHandlers;
 }) {
   const [open, setOpen] = useState(false);
   const transitions = useTransition(open, {
@@ -26,6 +35,10 @@ export default function WindowDialog({
   ) => {
     event.stopPropagation();
     event.preventDefault();
+  };
+
+  const handleClose = () => {
+    audioHandlers.playMusic();
   };
 
   return (
@@ -47,17 +60,17 @@ export default function WindowDialog({
               />
             </Dialog.Overlay>
             <Dialog.Content forceMount asChild>
-              <Dialog.Close asChild>
+              <Dialog.Close onClick={handleClose} asChild>
                 <div className="absolute flex justify-center items-center h-screen w-screen inset-0">
                   <animated.div
                     style={styles}
-                    className="bg-slate-100 absolute text-black rounded-md py-7 px-5"
+                    className="z-10 bg-slate-100 absolute text-black rounded-md py-7 px-5"
                     onClick={handleClick}
                   >
                     <iframe
                       width="560"
                       height="315"
-                      src={`https://www.youtube.com/embed/7yLxxyzGiko?si=HXyGoMzHfdwDXMe2&amp;start=${
+                      src={`https://www.youtube.com/embed/7yLxxyzGiko?si=${video}&amp;start=${
                         start || 0
                       }`}
                       title="YouTube video player"
