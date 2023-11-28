@@ -83,7 +83,7 @@ export default function WindowGrid({
   audioHandlers: AudioHandlers;
 }) {
   const windows = [];
-  const d = new Date("2023-12-24"); // for testing
+  const d = new Date(`2023-12-${entries.length}`); // for testing
   // const d = new Date();
 
   const getEntry = (
@@ -110,6 +110,7 @@ export default function WindowGrid({
     const disabled = !ytCode || d.getMonth() + 1 !== 12 || d.getDate() < i + 1;
     windows.push(
       <Window
+        dayPassed={d.getDate() >= i + 1}
         key={ytCode || i}
         ytCode={ytCode || ""}
         dayNum={i + 1}

@@ -39,13 +39,13 @@ export default function Home() {
   const turnDownMusic = () => {
     if (audioElem.current) {
       audioElem.current.pause();
-      audioElem.current.volume = 0.5;
+      audioElem.current.volume = 0.4;
     }
   };
 
   const playMusic = () => {
     if (audioElem.current) {
-      audioElem.current.volume = 0.5;
+      audioElem.current.volume = 0.4;
       audioElem.current.play();
     }
   };
@@ -58,7 +58,10 @@ export default function Home() {
   const onClick = () => {
     if (enteredPage.current) return;
     santaAnimRef.start({
-      to: { opacity: 0, transform: "rotate(1turn)" },
+      to: [
+        { opacity: 0.5, transform: "rotate(0.5turn)" },
+        { opacity: 0, transform: "rotate(0.5turn)" },
+      ],
       onStart: () => {
         console.log("start");
         playMusic();
@@ -67,11 +70,12 @@ export default function Home() {
         setTimeout(() => {
           overlayElem.current?.classList.add("hidden");
           console.log("off");
-        }, 500);
+        }, 1200);
       },
     });
     overlayAnimRef.start({
       to: { opacity: 0 },
+      delay: 700,
     });
   };
 

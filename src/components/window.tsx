@@ -9,6 +9,7 @@ export interface WindowProps {
   disabled: boolean;
   start: number;
   audioHandlers: AudioHandlers;
+  dayPassed: boolean;
 }
 
 export default function Window({
@@ -17,11 +18,13 @@ export default function Window({
   disabled,
   start,
   audioHandlers,
+  dayPassed,
 }: WindowProps) {
-  const additional = disabled
+  const isDisabled = disabled
     ? ""
-    : "hover:bg-green-700 hover:shadow-2xl hover:shadow-color-slate-800/60 hover:cursor-pointer";
+    : "hover:bg-green-700 hover:shadow-2xl hover:shadow-color-slate-800/60 hover:cursor-pointer hover:translate-y-[-8px] transition-all ease-in-out duration-300";
 
+  const isAvailable = dayPassed ? "bg-green-800" : "bg-green-900";
   const [initialEntry, setEntry] = useLocalStorage({
     key: `day-${dayNum}`,
     initialValue: {
@@ -45,8 +48,10 @@ export default function Window({
           pointerEvents: disabled ? "none" : "auto",
         }}
         className={
-          "m-2 bg-green-800 rounded-md flex justify-center items-center transition-all ease-in-out " +
-          additional
+          "m-2 rounded-md flex justify-center items-center transition-all ease-in-out " +
+          isDisabled +
+          " " +
+          isAvailable
         }
         onClick={() => {
           console.log("click");
@@ -57,8 +62,10 @@ export default function Window({
       >
         {opened ? (
           <span style={{ fontSize: "1.5rem" }}>🌟</span>
+        ) : dayPassed ? (
+          <span className={"text-white font-bold"}>{dayNum}</span>
         ) : (
-          <span className="font-bold">{dayNum}</span>
+          ""
         )}
       </div>
     </WindowDialog>
