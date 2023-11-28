@@ -3,6 +3,8 @@ import WindowDialog from "./window-dialog";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { AudioHandlers } from "@/pages";
 
+const makeKey = (dayNum: number, version: number) => `day-${dayNum}-${version}`;
+
 export interface WindowProps {
   dayNum: number;
   ytCode: string;
@@ -26,7 +28,7 @@ export default function Window({
 
   const isAvailable = dayPassed ? "bg-green-800" : "bg-green-900";
   const [initialEntry, setEntry] = useLocalStorage({
-    key: `day-${dayNum}`,
+    key: makeKey(dayNum, 2),
     initialValue: {
       opened: false,
     },
