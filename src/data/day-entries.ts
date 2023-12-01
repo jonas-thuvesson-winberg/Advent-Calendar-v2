@@ -84,8 +84,8 @@ export const entries: {
 ];
 
 export const getTodaysDate = () => {
-  // const date = new Date(`2023-12-24`); // for testing
-  const date = new Date();
+  const date = new Date(`2023-12-24`); // for testing
+  // const date = new Date();
   return date;
 };
 

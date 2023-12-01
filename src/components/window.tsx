@@ -25,9 +25,19 @@ export default function Window({
 }: WindowProps) {
   const isDisabled = disabled
     ? ""
-    : "hover:bg-green-500 hover:shadow-2xl hover:shadow-color-slate-700/60 hover:cursor-pointer hover:translate-y-[-8px] transition-all ease-in-out duration-300";
+    : `hover:bg-white/10 
+      hover:border-[2px]
+      hover:border-solid
+      hover:border 
+      hover:shadow-xl
+      hover:shadow-color-slate-700/70 
+      hover:cursor-pointer 
+      hover:translate-y-[-4px] 
+      transition
+      ease-in-out 
+      duration-300`;
 
-  const isAvailable = dayPassed && !disabled ? "bg-green-600" : "bg-green-800";
+  const isAvailable = dayPassed && !disabled ? "bg-white/40" : "bg-white/10";
   const [initialEntry, setEntry] = useLocalStorage({
     key: makeKey(dayNum, version),
     initialValue: {
@@ -51,7 +61,7 @@ export default function Window({
           pointerEvents: disabled ? "none" : "auto",
         }}
         className={
-          "m-2 rounded-md flex justify-center items-center transition-all ease-in-out " +
+          "m-4 rounded-md flex justify-center items-center transition-all ease-in-out backdrop-blur-sm " +
           isDisabled +
           " " +
           isAvailable
@@ -65,8 +75,9 @@ export default function Window({
       >
         {opened ? (
           <span style={{ fontSize: "1.5rem" }}>🌟</span>
+          // <span style={{ fontSize: "1.5rem" }}>❄️</span>
         ) : dayPassed && !disabled ? (
-          <span className={"text-white font-bold"}>{dayNum}</span>
+          <span className={"text-black text-lg"}>{dayNum}</span>
         ) : (
           ""
         )}

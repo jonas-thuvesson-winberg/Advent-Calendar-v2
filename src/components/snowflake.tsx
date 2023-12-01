@@ -64,7 +64,7 @@ export default function Snowflake({
         transform: `translate(${horizontalOffset}px, ${counterRef.current}px)`,
         maxWidth: `${size * 2}px`,
       }}
-      className={`ml-2 inline absolute rounded-xl bg-white`}
+      className={`ml-2 inline absolute rounded-xl bg-white/50 bg-blend-xl`}
     ></div>
   );
 }

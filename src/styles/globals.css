@@ -20,11 +20,15 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  background-image: url("https://source.unsplash.com/1600x900/?christmas,winter");
+  background-size: cover;
+  background-color: rgba(100,100,80,.5);
+  background-blend-mode: multiply;
+  /* color: rgb(var(--foreground-rgb)); */
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
 }
