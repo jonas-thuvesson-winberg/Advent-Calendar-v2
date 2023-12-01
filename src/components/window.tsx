@@ -1,7 +1,8 @@
-import { RefObject, forwardRef, useState } from "react";
+import { useState } from "react";
 import WindowDialog from "./window-dialog";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { AudioHandlers } from "@/pages";
+import { version } from "@/data/version";
 
 const makeKey = (dayNum: number, version: number) => `day-${dayNum}-${version}`;
 
@@ -24,11 +25,11 @@ export default function Window({
 }: WindowProps) {
   const isDisabled = disabled
     ? ""
-    : "hover:bg-green-700 hover:shadow-2xl hover:shadow-color-slate-800/60 hover:cursor-pointer hover:translate-y-[-8px] transition-all ease-in-out duration-300";
+    : "hover:bg-green-500 hover:shadow-2xl hover:shadow-color-slate-700/60 hover:cursor-pointer hover:translate-y-[-8px] transition-all ease-in-out duration-300";
 
-  const isAvailable = dayPassed ? "bg-green-800" : "bg-green-900";
+  const isAvailable = dayPassed && !disabled ? "bg-green-600" : "bg-green-800";
   const [initialEntry, setEntry] = useLocalStorage({
-    key: makeKey(dayNum, 2),
+    key: makeKey(dayNum, version),
     initialValue: {
       opened: false,
     },
@@ -64,7 +65,7 @@ export default function Window({
       >
         {opened ? (
           <span style={{ fontSize: "1.5rem" }}>🌟</span>
-        ) : dayPassed ? (
+        ) : dayPassed && !disabled ? (
           <span className={"text-white font-bold"}>{dayNum}</span>
         ) : (
           ""
