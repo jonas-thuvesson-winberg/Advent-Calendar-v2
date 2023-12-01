@@ -120,7 +120,7 @@ export default function Home() {
       <audio ref={audioElem} src="jingle-bells.mp3" loop={true}></audio>
       <main
         style={{ maxWidth: maxW + "px", maxHeight: maxH + "px" }}
-        className={`h-screen w-screen bg-red-900`}
+        className={`lg:h-[100vh] h-[95vh] w-screen bg-red-900`}
       >
         <div
           style={{
@@ -128,13 +128,22 @@ export default function Home() {
             maxHeight: maxH + "px",
             pointerEvents: "none",
           }}
-          className="z-1 w-full h-full absolute overflow-x-hidden overflow-y-hidden"
+          className="z-1 w-full lg:h-[100vh] h-[90vh] md:h-[95vh] absolute overflow-x-hidden overflow-y-hidden"
         >
           {snowFlakes}
+
+          <div className="flex flex-col justify-center items-center h-screen w-screen max-w-full max-h-full">
+            <h1
+              style={{ fontFamily: "Smooch, cursive" }}
+              className="text-9xl text-center mb-5"
+            >
+              God Jul
+            </h1>
+            <NoSsr>
+              <WindowGrid audioHandlers={audioHandlers} />
+            </NoSsr>
+          </div>
         </div>
-        <NoSsr>
-          <WindowGrid audioHandlers={audioHandlers} />
-        </NoSsr>
       </main>
     </>
   );

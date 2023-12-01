@@ -34,10 +34,8 @@ export default function WindowGrid({
   }
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen max-w-full max-h-full">
-      <div className="flex flex-row flex-wrap lg:w-1/2 md:w-full">
-        {windows}
-      </div>
-    </div>
+    // <div className="flex justify-center items-center h-screen w-screen max-w-full max-h-full">
+    <div className="flex flex-row flex-wrap lg:w-1/2 md:w-full">{windows}</div>
+    // </div>
   );
 }
