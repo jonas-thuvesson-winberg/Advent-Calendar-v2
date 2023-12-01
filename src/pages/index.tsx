@@ -101,7 +101,7 @@ export default function Home() {
       <animated.div
         style={overlayStyle}
         ref={overlayElem}
-        className={`z-10 absolute h-screen w-screen flex justify-center items-center bg-black/50`}
+        className={`z-10 absolute h-screen w-screen flex justify-center items-center bg-black/70`}
       >
         <animated.img
           onClick={onClick}
