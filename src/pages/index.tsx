@@ -88,6 +88,7 @@ export default function Home() {
     const delay = getRandomInt(800, 0);
     snowFlakes.push(
       <Snowflake
+        key={i + "_snowflake"}
         size={size}
         speed={speed}
         horizontalOffset={horizontal}
