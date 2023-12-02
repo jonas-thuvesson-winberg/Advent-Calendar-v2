@@ -6,8 +6,7 @@
     "dev": "next dev",
     "dev-network": "npm run dev -- -H 192.168.1.168",
     "build": "next build",
-    "start": "next start",
-    "start-network": "npm run start -- -H 192.168.1.168",
+    "start": "npx serve@latest out -l 3000",
     "lint": "next lint"
   },
   "dependencies": {
