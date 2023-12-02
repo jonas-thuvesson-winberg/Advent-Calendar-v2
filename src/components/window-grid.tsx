@@ -17,8 +17,6 @@ export default function WindowGrid({
     const { ytCode, start } = parseEntry(
       i < entries.length ? entries[i] : null
     );
-    console.log("here");
-    console.log(ytCode);
     const disabled = !ytCode || d.getMonth() + 1 !== 12 || d.getDate() < i + 1;
     windows.push(
       <Window
@@ -34,10 +32,10 @@ export default function WindowGrid({
   }
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen max-w-full max-h-full">
-      <div className="flex flex-row flex-wrap lg:w-[70vw] md:w-full">
-        {windows}
-      </div>
+    // <div className="flex justify-center items-center">
+    <div className="flex flex-row flex-wrap lg:w-[70vw] md:w-full">
+      {windows}
     </div>
+    // </div>
   );
 }

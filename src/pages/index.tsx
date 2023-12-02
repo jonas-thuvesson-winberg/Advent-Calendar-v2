@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import Snowflake from "@/components/snowflake";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ElementRef, ReactElement, useEffect, useRef, useState } from "react";
 import WindowGrid from "@/components/window-grid";
 import NoSsr from "@/components/no-ssr";
 import {
@@ -22,6 +22,7 @@ export interface AudioHandlers {
 export default function Home() {
   const [width, setWidth] = useState(1000);
   const [height, setHeight] = useState(1000);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.addEventListener("resize", calibrateHeight);
@@ -29,23 +30,22 @@ export default function Home() {
   }, []);
 
   const calibrateHeight = () => {
-    console.log("calibrating");
     const body = document.body;
     const html = document.documentElement;
 
     const height = Math.max(
+      gridRef.current?.clientHeight || 0,
       body.scrollHeight,
       body.offsetHeight,
-      html.clientHeight,
-      html.scrollHeight,
-      html.offsetHeight
+      body.clientHeight,
+      html.offsetHeight,
+      html.clientHeight
     );
 
+    console.log(height);
+
     const width = Math.max(
-      body.scrollWidth,
-      body.offsetWidth,
-      html.clientWidth,
-      html.offsetWidth
+      html.clientWidth
     );
 
     setHeight(height);
@@ -93,13 +93,11 @@ export default function Home() {
         { opacity: 0, transform: "rotate(0.5turn)" },
       ],
       onStart: () => {
-        console.log("start");
         playMusic();
         enteredPage.current = true;
 
         setTimeout(() => {
           overlayElem.current?.classList.add("hidden");
-          console.log("off");
         }, 1200);
       },
     });
@@ -129,9 +127,9 @@ export default function Home() {
   return (
     <NoSsr>
       <animated.div
-        style={overlayStyle}
+        style={{ ...overlayStyle, height: height + "px", width: width + "px" }}
         ref={overlayElem}
-        className={`z-10 absolute h-screen w-screen flex justify-center items-center bg-black/70`}
+        className={`z-10 absolute flex justify-center items-center bg-black/70`}
       >
         <animated.img
           onClick={onClick}
@@ -144,19 +142,21 @@ export default function Home() {
       </animated.div>
       <audio ref={audioElem} src="jingle-bells.mp3" loop={true}></audio>
       <main
-        style={{ height: height + "px", width: width + "px" }}
-        className={`w-screen`}
+        style={{
+          height: height + "px",
+          width: width + "px",
+        }}
       >
         <div
           style={{
-            // width: maxW + "px",
             pointerEvents: "none",
+            height: height + "px",
           }}
-          className="z-1 w-full h-full absolute overflow-x-hidden overflow-y-hidden"
+          className="z-1 absolute overflow-x-hidden overflow-y-hidden w-full"
         >
           {snowFlakes}
 
-          <div className="flex flex-col justify-center items-center w-full h-full">
+          <div className="flex flex-col justify-center items-center overflow-scroll">
             <h1
               style={{
                 fontFamily: "Smooch, cursive",
@@ -166,7 +166,9 @@ export default function Home() {
             >
               God Jul
             </h1>
-            <WindowGrid audioHandlers={audioHandlers} />
+            <div ref={gridRef}>
+              <WindowGrid audioHandlers={audioHandlers} />
+            </div>
           </div>
         </div>
       </main>
