@@ -81,6 +81,13 @@ export const entries: {
     start: 0,
     end: null,
   },
+  // 12
+  {
+    // Miniröris, jorden runt
+    ytCode: "RK_4Iu6C1D4",
+    start: 5,
+    end: null,
+  },
 ];
 
 export const getTodaysDate = () => {

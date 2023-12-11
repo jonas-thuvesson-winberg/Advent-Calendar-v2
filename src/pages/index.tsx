@@ -20,14 +20,11 @@ export interface AudioHandlers {
 }
 
 export default function Home() {
-  const [width, setWidth] = useState(1000);
-  const [height, setHeight] = useState(1000);
+  // const [width, setWidth] = useState(1000);
+  // const [height, setHeight] = useState(1000);
+  const [init, setInit] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    window.addEventListener("resize", calibrateHeight);
-    calibrateHeight();
-  }, []);
 
   const calibrateHeight = () => {
     const body = document.body;
@@ -44,13 +41,20 @@ export default function Home() {
 
     console.log(height);
 
-    const width = Math.max(
-      html.clientWidth
-    );
+    const width = Math.max(html.clientWidth);
 
-    setHeight(height);
-    setWidth(width);
+    setDimensions({ height, width });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("triggered");
+      window.addEventListener("resize", () => {
+        calibrateHeight();
+      });
+      calibrateHeight();
+    });
+  }, []);
 
   const [santaStyle, santaAnimRef] = useSpring(() => ({
     config: config.slow,
@@ -111,7 +115,7 @@ export default function Home() {
   for (let i = 0; i < 200; i++) {
     const size = getRandomInt(10, 3);
     const speed = getRandomInt(15, 3);
-    const horizontal = getRandomInt(width, 0);
+    const horizontal = getRandomInt(dimensions.width, 0);
     const delay = getRandomInt(800, 0);
     snowFlakes.push(
       <Snowflake
@@ -127,7 +131,11 @@ export default function Home() {
   return (
     <NoSsr>
       <animated.div
-        style={{ ...overlayStyle, height: height + "px", width: width + "px" }}
+        style={{
+          ...overlayStyle,
+          height: dimensions.height + "px",
+          width: dimensions.width + "px",
+        }}
         ref={overlayElem}
         className={`z-10 absolute flex justify-center items-center bg-black/70`}
       >
@@ -143,14 +151,14 @@ export default function Home() {
       <audio ref={audioElem} src="jingle-bells.mp3" loop={true}></audio>
       <main
         style={{
-          height: height + "px",
-          width: width + "px",
+          height: dimensions.height + "px",
+          width: dimensions.width + "px",
         }}
       >
         <div
           style={{
             pointerEvents: "none",
-            height: height + "px",
+            height: dimensions.height + "px",
           }}
           className="z-1 absolute overflow-x-hidden overflow-y-hidden w-full"
         >
