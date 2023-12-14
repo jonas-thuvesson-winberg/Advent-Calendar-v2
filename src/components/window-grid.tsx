@@ -14,7 +14,7 @@ export default function WindowGrid({
   // const d = new Date();
 
   for (let i = 0; i < 24; i++) {
-    const { ytCode, start } = parseEntry(
+    const { ytCode, start, end } = parseEntry(
       i < entries.length ? entries[i] : null
     );
     const disabled = !ytCode || d.getMonth() + 1 !== 12 || d.getDate() < i + 1;
@@ -26,6 +26,7 @@ export default function WindowGrid({
         dayNum={i + 1}
         disabled={disabled}
         start={start || 0}
+        end={end || 0}
         audioHandlers={audioHandlers}
       />
     );

@@ -11,6 +11,7 @@ export interface WindowProps {
   ytCode: string;
   disabled: boolean;
   start: number;
+  end: number;
   audioHandlers: AudioHandlers;
   dayPassed: boolean;
 }
@@ -20,6 +21,7 @@ export default function Window({
   ytCode,
   disabled,
   start,
+  end,
   audioHandlers,
   dayPassed,
 }: WindowProps) {
@@ -50,6 +52,7 @@ export default function Window({
   return (
     <WindowDialog
       start={start}
+      end={end}
       video={ytCode}
       disabled={disabled}
       audioHandlers={audioHandlers}
@@ -75,8 +78,8 @@ export default function Window({
       >
         {opened ? (
           <span style={{ fontSize: "1.5rem" }}>🌟</span>
-          // <span style={{ fontSize: "1.5rem" }}>❄️</span>
-        ) : dayPassed && !disabled ? (
+        ) : // <span style={{ fontSize: "1.5rem" }}>❄️</span>
+        dayPassed && !disabled ? (
           <span className={"text-black text-lg"}>{dayNum}</span>
         ) : (
           ""

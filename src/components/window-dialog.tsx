@@ -14,12 +14,14 @@ export default function WindowDialog({
   video,
   disabled,
   start,
+  end,
   audioHandlers,
 }: {
   children: ReactNode;
   video: string;
   disabled: boolean;
   start: number;
+  end: number;
   audioHandlers: AudioHandlers;
 }) {
   const [open, setOpen] = useState(false);
@@ -70,7 +72,7 @@ export default function WindowDialog({
                     <iframe
                       className="w-full h-full"
                       // width="560"
-                      src={`https://www.youtube.com/embed/${video}?start=${start}&controls=0&rel=0`}
+                      src={`https://www.youtube.com/embed/${video}?start=${start}&end=${end}&controls=0&rel=0`}
                       title="YouTube video player"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

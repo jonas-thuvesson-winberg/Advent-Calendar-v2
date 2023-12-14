@@ -86,8 +86,36 @@ export const entries: {
     // Miniröris, jorden runt
     ytCode: "RK_4Iu6C1D4",
     start: 5,
+    end: 142,
+  },
+  // 13
+  {
+    // Lucia
+    ytCode: "h_dOzss9ydk",
+    start: 5,
+    end: 112,
+  },
+  // 14
+  {
+    // pippi
+    ytCode: "dCV6Kfde4V4",
+    start: 0,
     end: null,
   },
+  // 15
+  {
+    // Snowflake (snögubbe som sjunger)
+    ytCode: "tbbKjDjMDok",
+    start: 0,
+    end: 130,
+  },
+  // 16
+  {
+    // Coco-melon, ice skating song
+    ytCode: "GLAEX22F9_k",
+    start: 0,
+    end: 168
+  }
 ];
 
 export const getTodaysDate = () => {
