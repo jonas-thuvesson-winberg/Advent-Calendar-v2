@@ -27,7 +27,7 @@ export default function Window({
 }: WindowProps) {
   const isDisabled = disabled
     ? ""
-    : `hover:bg-white/10 
+    : `hover:bg-white/30 
       hover:border-[2px]
       hover:border-solid
       hover:border 
@@ -39,7 +39,7 @@ export default function Window({
       ease-in-out 
       duration-300`;
 
-  const isAvailable = dayPassed && !disabled ? "bg-white/40" : "bg-white/10";
+  const isAvailable = dayPassed && !disabled ? "bg-white/50" : "bg-white/20";
   const [initialEntry, setEntry] = useLocalStorage({
     key: makeKey(dayNum, version),
     initialValue: {
@@ -77,9 +77,10 @@ export default function Window({
         }}
       >
         {opened ? (
-          <span style={{ fontSize: "1.5rem" }}>🌟</span>
-        ) : // <span style={{ fontSize: "1.5rem" }}>❄️</span>
-        dayPassed && !disabled ? (
+          <span style={{ fontSize: "1.5rem" }}>
+            🌟 <span className="text-black text-lg"> {dayNum}</span>
+          </span>
+        ) : dayPassed && !disabled ? (
           <span className={"text-black text-lg"}>{dayNum}</span>
         ) : (
           ""

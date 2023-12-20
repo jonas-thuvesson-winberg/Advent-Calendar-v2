@@ -114,8 +114,64 @@ export const entries: {
     // Coco-melon, ice skating song
     ytCode: "GLAEX22F9_k",
     start: 0,
-    end: 168
-  }
+    end: 168,
+  },
+  // 17
+  {
+    // Babblarnas julvisa
+    ytCode: "EOzMcgpQAbg",
+    start: 7,
+    end: null,
+  },
+  // 18
+  {
+    // Kompisbandet, God jul (hakor)
+    ytCode: "PxIhUIafrLM",
+    start: 182,
+    end: 285,
+  },
+  // 19
+  {
+    // vi komma, hey kids
+    ytCode: "0aYaoVjpegQ",
+    start: 6,
+    end: 92,
+  },
+  // 20
+  {
+    // Tipp tapp, barnplaneten
+    ytCode: "IbNF51Uqfic",
+    start: 4,
+    end: 114,
+  },
+  // 21
+  {
+    // Julkula (animerad), ren(?)
+    ytCode: "O1C9zOQpKG4",
+    start: 12,
+    end: 316,
+  },
+  // 22
+  {
+    // Olof, frost
+    ytCode: "HJEud5DGXJo",
+    start: 0,
+    end: null,
+  },
+  // 23
+  {
+    // santas workshop
+    ytCode: "Jm_HUhHKWC0",
+    start: 0,
+    end: null,
+  },
+  // 24 (julafton)
+  {
+    // babblarna, jul (teater)
+    ytCode: "ucJq9Ut4YWQ",
+    start: 0,
+    end: null,
+  },
 ];
 
 export const getTodaysDate = () => {
